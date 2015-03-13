@@ -9,12 +9,14 @@
 <body>
 <font color="red">
 <%
-	out.print("¤·.¤·?");
+	out.print("Hello");
 %>
 </font>
+
+   
 <br>
 <%
-	out.print("<font color='blue'>"+"²ÙÂ¥"+"</font>");
+	out.print("<font color='blue'>"+"JaHyun"+"</font>");
 %>
 
 </body>
