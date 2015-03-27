@@ -6,19 +6,32 @@
 <head>
 	<title>JSP/Servlet Example</title>
 	<style>
+	/*body {
+		background-image:url("cat.jpg");
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		}*/
 		input {
 			border : green 1pt solid;
 			color : red;
 			font-size : 14px; 
+			background-color : aqua;
 			}
 	</style>
+	
+	<script>
+		function func(){
+			alert("Hello JavaScript!");
+		}
+	</script>
+	
 </head>
 
 <body>
 <h1>request test</h1>
 <hr>
 
-<form action="TestServlet">
+<form action="TestServlet" onsubmit="return func()">
 	<label for="name">이름 : </label><input type="text" id="name" name="name"><br>
 	<input type="password" ><br>
 	<input type="radio" name="gender" value="남자"> 남자
