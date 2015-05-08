@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ListServelet
+ * Servlet implementation class ViewServlet
  */
-@WebServlet("/list")
-public class ListServelet extends HttpServlet {
+@WebServlet("/view")
+public class ViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListServelet() {
+    public ViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +34,16 @@ public class ListServelet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} //ojdbc6.jar 클래스 추가
-	    
-	    //2.데이터 베이스와 연결
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		out.print("<h1>회원 상세페이지</h1>");
+		
+		String id = request.getParameter("id");
+		//out.print(id);
+	
+		//2. 데이터베이스 연결
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","jspuserc","jsp1234");
@@ -50,44 +52,60 @@ public class ListServelet extends HttpServlet {
 			e.printStackTrace();
 		}//서버연결주소,아이디,비밀번호 설정해줘야함
 	    //getconnection 메소드는 connection타입 return , 기본제공 객체라 new안해도됨
-	    
-	    //3.SQL문 실행
-		PreparedStatement pstmt = null;
-		String sql = "select * from member"; 
-	   
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
 		
-	    try {
-			 pstmt = con.prepareStatement(sql);
-			 ResultSet rs = pstmt.executeQuery();
-			 
-			 out.print("<h1>회원 리스트</h1><hr>");
-			 
-			 out.print("<table border=1>");
-			 out.print("<tr>");
-			 out.print("<th>아이디</th><th>이름</th><th>나이</th><th>성별</th><th>주소</th>");
-			 out.print("</tr>");
-			 
-			 while(rs.next() ==true){
-				out.print("<tr>");
+		//3. sql문 실행
+		PreparedStatement pstmt = null;
+		String sql = "select * from member where id=?";
+		
+		try{
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				out.print("<table border=1>");
 				
-				out.print("<td><a href='view?id="+rs.getString("id")+"'>"+rs.getString("id")+"</a></td>");
-				out.print("<td>"+rs.getString("name")+"</td>");
-				out.print("<td>"+rs.getInt("age")+"</td>");
-				out.print("<td>"+rs.getString("gender")+"</td>");
-				out.print("<td>"+rs.getString("addr")+"</td>");
-
+				out.print("<tr>");
+				out.print("<td>아이디</td>");
+				out.print("<td>"+rs.getString("id")+"</td>");
 				out.print("</tr>");
-			 }
-			 out.print("</table>");
-			 	 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+				
+				out.print("<tr>");
+				out.print("<td>이름</td>");
+				out.print("<td>"+rs.getString("name")+"</td>");
+				out.print("</tr>");
+				
+				out.print("<tr>");
+				out.print("<td>나이</td>");
+				out.print("<td>"+rs.getString("age")+"</td>");
+				out.print("</tr>");
+				
+				out.print("<tr>");
+				out.print("<td>성별</td>");
+				out.print("<td>"+rs.getString("gender")+"</td>");
+				out.print("</tr>");
+				
+				out.print("<tr>");
+				out.print("<td>주소</td>");
+				out.print("<td>"+rs.getString("addr")+"</td>");
+				out.print("</tr>");
+				
+				out.print("</table>");
+				
+				out.print("<a href='delete.jsp?id="+rs.getString("id")+"'>삭제</a>");
+			}
+			
+		}catch(SQLException e){
+			//TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	  
-	    
+		
+		
+		
+		
 	}
 
 	/**
