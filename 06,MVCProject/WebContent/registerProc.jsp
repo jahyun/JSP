@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="exam.dao.*, exam.dto.*" %>
+<%@ page import="exam.dao.*" %>
+<%@ page import="exam.dto.*" %>
 <%
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
@@ -14,11 +15,12 @@
 	Member member = new Member();
 	
 	member.setId(id);
-	member.setPass(pwd);
+	member.setPwd(pwd);
 	member.setName(name);
 	member.setAge(Integer.parseInt(age));
 	member.setGender(gender);
 	member.setAddr(addr);
+	
 	dao.insertMember(member);
 
 

@@ -22,7 +22,7 @@
     	
     	<label for="age">나이 : </label>
     	<input type="text" name="age" id="age"><br>
-
+    	
     	<label for="gender">성별 : </label>
     	<input type ="radio" name = "gender" id="gender" value="m">남자
     	<input type="radio" name ="gender" id="gender" value="f">여자<br>
