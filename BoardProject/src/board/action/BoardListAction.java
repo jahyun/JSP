@@ -23,9 +23,7 @@ public class BoardListAction implements Action {
 		request.setAttribute("list", list);
 		
 		String uri = "./board/list.jsp"; //jsp파일을 보여주면 됨 
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(uri);
-		
 		dispatcher.forward(request, response);
 
 	}

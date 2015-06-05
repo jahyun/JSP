@@ -32,13 +32,14 @@ public class BoardDAO {
 	}
 	//글쓰기
 	public int insertBoard(Board board){
-		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, default, default, 'file')";
+		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, default, default, ?)";
 		try {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, board.getName());
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getContent());
+			pstmt.setString(4, board.getAttachment());
 			
 			int result = pstmt.executeUpdate();
 			return result;
@@ -77,10 +78,46 @@ public class BoardDAO {
 		
 		return list;		
 	}
+	//상세보기
 	public Board seletOnBoardByNum(int num){
-		return null;		
+		String sql = "select * from board where num=?";
+		Board board = new Board();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				board.setNum(rs.getInt("num"));
+				board.setName(rs.getString("name"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setAttachment(rs.getString("attachment"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return board;		
 	}
 	public void updateHits(int num){
+		String sql = "update board set hits = hits + 1 where num = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 	public int updateBoard(Board board){

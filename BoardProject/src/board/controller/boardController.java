@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import board.action.Action;
 import board.action.BoadrWriteFormAction;
 import board.action.BoardListAction;
+import board.action.BoardViewAction;
 import board.action.BoardWriteAction;
 
 /**
@@ -69,6 +70,11 @@ public class boardController extends HttpServlet {
 		else if(command.equals("/list.KOO")){
 			System.out.println("/list.board");
 			Action action = new BoardListAction();
+			action.execute(request, response);
+		}
+		else if(command.equals("/view.KOO")){
+			System.out.println("/view.board");
+			Action action = new BoardViewAction();
 			action.execute(request, response);
 		}
 	}

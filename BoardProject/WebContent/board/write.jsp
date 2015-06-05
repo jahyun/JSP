@@ -31,7 +31,7 @@
 		</nav>
 		
 		<!-- 게시판 글쓰기  시작  -->
-		<form class="form-horizontal" method="post" action="write.KOO">
+		<form class="form-horizontal" method="post" enctype="multipart/form-data" action="write.KOO">
 		  <fieldset>
 		    <legend>게시판 글쓰기 </legend>
 		    
@@ -59,7 +59,7 @@
 		    <div class="form-group">
 		      <label for="file" class="col-lg-2 control-label">첨부파일 : </label>
 		      <div class="col-lg-10">
-		        <input type="file" class="form-control" id="file" placeholder="파일을 선택하세요.">
+		        <input type="file" class="form-control" name="file" id="file" placeholder="파일을 선택하세요.">
 		      </div>
 		    </div>
 		    

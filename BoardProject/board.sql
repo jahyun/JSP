@@ -4,9 +4,9 @@ num		number primary key,
 name	varchar2(10),
 title	varchar2(100),
 content	varchar2(1000),
-hits	 default 0,
+hits	number default 0,
 wdate	date default sysdate,
-attachment	varchar2(50)
+attachment	varchar2(50) 
 )
 create sequence board_seq
 

@@ -60,7 +60,7 @@
 		  %>
 		    <tr>
 		      <td><%= board.getNum() %></td>
-		      <td><a href="view.jsp"><%= board.getTitle() %></a></td>
+		      <td><a href="view.KOO?num=<%=board.getNum()%>"><%= board.getTitle() %></a></td>
 		      <td><%= board.getName() %></td>
 		      <td><%= board.getWdate() %></td>
 		      <td><%= board.getHits() %></td>
@@ -100,7 +100,7 @@
 				      		
 						<input type="text" name="keyword">
 						<a href="#" class="btn btn-danger">검색</a>
-						<a href="write.jsp" class="btn btn-primary">글쓰기</a>
+						<a href="writeForm.KOO" class="btn btn-primary">글쓰기</a>
 					</div>
 		  		</td>
 		  	</tr>
